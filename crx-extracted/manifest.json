@@ -62,7 +62,8 @@
   "permissions": [
     "storage",
     "declarativeNetRequest",
-    "scripting"
+    "scripting",
+    "tabCapture"
   ],
   "host_permissions": [
     "https://chatgpt.com/*",
