@@ -60,6 +60,7 @@
     }
   ],
   "permissions": [
+    "activeTab",
     "storage",
     "declarativeNetRequest",
     "scripting",
