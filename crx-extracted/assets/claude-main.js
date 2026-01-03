@@ -207,6 +207,103 @@
     wrapStorage(window.sessionStorage);
   } catch {}
 
+  const SIDEBAR_SELECTORS = [
+    "nav[aria-label='Sidebar']",
+    ".z-sidebar",
+    "[data-testid*='sidebar' i]",
+  ];
+  const TOGGLE_SELECTORS = [
+    "[data-testid='pin-sidebar-toggle']",
+    "button[aria-label='Open sidebar']",
+    "button[aria-label='Sidebar']",
+  ];
+  const CSS_VARS = [
+    "--sidebar-width",
+    "--sidebar-collapsed-width",
+    "--sidebarCollapsedWidth",
+    "--sidebar-size",
+    "--sidebarSize",
+  ];
+  const MIN_SIDEBAR_WIDTH = 240;
+  let lastToggle = 0;
+  let pendingEnsure = false;
+
+  const queryFirst = (selectors) => {
+    for (const sel of selectors) {
+      const el = document.querySelector(sel);
+      if (el) return el;
+    }
+    return null;
+  };
+
+  const forceVars = () => {
+    const root = document.documentElement || document.body;
+    if (!root) return;
+    const value = `${MIN_SIDEBAR_WIDTH}px`;
+    for (const key of CSS_VARS) {
+      try {
+        root.style.setProperty(key, value, "important");
+      } catch {}
+    }
+  };
+
+  const forceSidebarStyles = (el) => {
+    if (!el) return;
+    const value = `${MIN_SIDEBAR_WIDTH}px`;
+    const rect = el.getBoundingClientRect();
+    if (rect.width < MIN_SIDEBAR_WIDTH) {
+      el.style.setProperty("width", value, "important");
+      el.style.setProperty("min-width", value, "important");
+      el.style.setProperty("max-width", value, "important");
+      el.style.setProperty("flex", `0 0 ${value}`, "important");
+    }
+    el.style.setProperty("transform", "translateX(0)", "important");
+    el.style.setProperty("opacity", "1", "important");
+    el.style.setProperty("visibility", "visible", "important");
+    el.style.setProperty("pointer-events", "auto", "important");
+    const display = window.getComputedStyle(el).display;
+    if (display === "none") el.style.setProperty("display", "flex", "important");
+  };
+
+  const ensureSidebarOpen = () => {
+    pendingEnsure = false;
+    forceVars();
+    const sidebar = queryFirst(SIDEBAR_SELECTORS);
+    if (sidebar) {
+      forceSidebarStyles(sidebar);
+      let p = sidebar.parentElement;
+      let depth = 0;
+      while (p && depth < 6) {
+        forceSidebarStyles(p);
+        p = p.parentElement;
+        depth += 1;
+      }
+      return;
+    }
+    const now = Date.now();
+    if (now - lastToggle < 800) return;
+    const toggle = queryFirst(TOGGLE_SELECTORS);
+    if (toggle && typeof toggle.click === "function") {
+      lastToggle = now;
+      toggle.click();
+    }
+  };
+
+  const scheduleEnsure = () => {
+    if (pendingEnsure) return;
+    pendingEnsure = true;
+    requestAnimationFrame(ensureSidebarOpen);
+  };
+
+  const obs = new MutationObserver(scheduleEnsure);
+  obs.observe(document.documentElement || document.body, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+  });
+  window.addEventListener("resize", scheduleEnsure);
+  scheduleEnsure();
+
   try {
     window.dispatchEvent(new Event("resize"));
   } catch {}
