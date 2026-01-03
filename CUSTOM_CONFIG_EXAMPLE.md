@@ -11,6 +11,9 @@
 | 万知 | https://www.wanzhi.com/ | - | - |
 | 360智脑 | https://chat.360.com/ | - | - |
 
+Optional fields:
+- openMode: "tab" (or "popout") to open the chat in a new tab instead of an embedded panel.
+
 You’re welcome to share your custom configs in the Issues section; they will be listed here for others to reference.
 
 欢迎在Issues中分享你的自定义配置，以供他人参考。
