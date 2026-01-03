@@ -1,16 +1,17 @@
 (() => {
-  const isEmbedded = () => {
+  window.__SCH_CLAUDE_MAIN_LOADED = true;
+
+  const isClaudeFrame = () => {
     try {
       if (window.top === window.self) return false;
-      const ao = window.location.ancestorOrigins;
-      if (!ao || !ao.length) return false;
-      return String(ao[0]).startsWith("chrome-extension://");
+      const host = window.location.hostname || "";
+      return host === "claude.ai" || host.endsWith(".claude.ai");
     } catch {
       return false;
     }
   };
 
-  if (!isEmbedded()) return;
+  if (!isClaudeFrame()) return;
   if (window.__SCH_CLAUDE_MAIN_PATCHED) return;
   window.__SCH_CLAUDE_MAIN_PATCHED = true;
 
@@ -25,28 +26,34 @@
     }
   };
 
-  safeDefine(window, "top", () => window);
+  // Try to reduce embed detection based on parent checks.
   safeDefine(window, "parent", () => window);
   safeDefine(window, "frameElement", () => null);
 
+  // Force desktop-style media query outcomes.
   const origMatchMedia = window.matchMedia;
   if (typeof origMatchMedia === "function") {
     window.matchMedia = (query) => {
       const real = origMatchMedia.call(window, query);
+      let forced = null;
       try {
-        if (/max-width\s*:\s*\d+px/i.test(query)) {
-          return new Proxy(real, {
-            get(target, prop) {
-              if (prop === "matches") return false;
-              const value = target[prop];
-              return typeof value === "function" ? value.bind(target) : value;
-            },
-          });
-        }
+        if (/max-(width|height)\s*:\s*\d+px/i.test(query)) forced = false;
+        if (/min-(width|height)\s*:\s*\d+px/i.test(query)) forced = true;
       } catch {
-        return real;
+        forced = null;
       }
-      return real;
+      if (forced === null) return real;
+      return new Proxy(real, {
+        get(target, prop) {
+          if (prop === "matches") return forced;
+          const value = target[prop];
+          return typeof value === "function" ? value.bind(target) : value;
+        },
+      });
     };
   }
+
+  try {
+    window.dispatchEvent(new Event("resize"));
+  } catch {}
 })();
