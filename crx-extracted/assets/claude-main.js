@@ -145,6 +145,68 @@
     };
   }
 
+  const SIDEBAR_KEY_RE = /(sidebar|nav|drawer|panel)/i;
+  const CLOSED_VALUE_RE = /(false|0|collapsed|closed|hidden)/i;
+  const OPEN_KEY_RE = /(open|expanded|pinned)/i;
+  const COLLAPSE_KEY_RE = /(collapsed|closed|hidden)/i;
+
+  const normalizeSidebarValue = (key, value) => {
+    if (!SIDEBAR_KEY_RE.test(String(key))) return value;
+    if (typeof value !== "string") return value;
+    const trimmed = value.trim();
+    if (!CLOSED_VALUE_RE.test(trimmed) && !/^\s*[\[{]/.test(trimmed)) return value;
+    if (/^\s*[\[{]/.test(trimmed)) {
+      try {
+        const data = JSON.parse(trimmed);
+        const fix = (node) => {
+          if (!node || typeof node !== "object") return;
+          for (const k of Object.keys(node)) {
+            const v = node[k];
+            if (typeof v === "boolean") {
+              if (COLLAPSE_KEY_RE.test(k)) node[k] = false;
+              if (OPEN_KEY_RE.test(k)) node[k] = true;
+              if (SIDEBAR_KEY_RE.test(k)) node[k] = true;
+            } else if (typeof v === "string") {
+              if (COLLAPSE_KEY_RE.test(k) && CLOSED_VALUE_RE.test(v)) node[k] = "false";
+              if (OPEN_KEY_RE.test(k) && CLOSED_VALUE_RE.test(v)) node[k] = "true";
+            } else {
+              fix(v);
+            }
+          }
+        };
+        fix(data);
+        return JSON.stringify(data);
+      } catch {
+        return "true";
+      }
+    }
+    return "true";
+  };
+
+  const wrapStorage = (storage) => {
+    if (!storage || storage.__SCH_SIDEBAR_WRAPPED) return;
+    storage.__SCH_SIDEBAR_WRAPPED = true;
+    const origGet = storage.getItem ? storage.getItem.bind(storage) : null;
+    const origSet = storage.setItem ? storage.setItem.bind(storage) : null;
+    if (origGet) {
+      storage.getItem = (key) => {
+        const value = origGet(key);
+        return normalizeSidebarValue(key, value);
+      };
+    }
+    if (origSet) {
+      storage.setItem = (key, value) => {
+        const normalized = normalizeSidebarValue(key, String(value));
+        return origSet(key, normalized);
+      };
+    }
+  };
+
+  try {
+    wrapStorage(window.localStorage);
+    wrapStorage(window.sessionStorage);
+  } catch {}
+
   try {
     window.dispatchEvent(new Event("resize"));
   } catch {}
