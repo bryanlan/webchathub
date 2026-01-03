@@ -29,9 +29,6 @@
   // Try to reduce embed detection based on parent checks.
   safeDefine(window, "parent", () => window);
   safeDefine(window, "frameElement", () => null);
-  safeDefine(window, "self", () => window.top || window);
-  safeDefine(window, "window", () => window.top || window);
-  safeDefine(Object.getPrototypeOf(window), "self", () => window.top || window);
 
   // Force desktop-style media query outcomes.
   const origMatchMedia = window.matchMedia;
