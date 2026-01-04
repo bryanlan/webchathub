@@ -1,5 +1,15 @@
 # simple-chat-hub
 
+> Fork notice: This repository is a fork of https://github.com/jackyr/simple-chat-hub-extension and is not affiliated with the upstream author.
+
+## Fork changes (this repo)
+- Removes non-chatbot API calls from the extension and blocks requests to non-allowlisted hosts.
+- Handles the Claude embedded sidebar issue by opening Claude in a separate tab and showing a live preview stream in the panel (desktopCapture).
+- Keeps the rest of the upstream UI/features where possible; see upstream README below for general usage details.
+
+## Upstream
+Upstream project: https://github.com/jackyr/simple-chat-hub-extension
+
 [中文Readme](https://github.com/jackyr/simple-chat-hub-extension/blob/main/README_CN.md)
 
 ### [Homepage](https://chathub.aipilot.cc/)
