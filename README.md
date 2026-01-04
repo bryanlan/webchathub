@@ -55,22 +55,5 @@ ChatGPT / Copilot / Gemini / Meta / Mistral / Grok / Poe / Perplexity / You.com 
 ### Privacy Statement
 This extension will not collect or leak any of your privacy data. Chat session services are provided by platform official websites.
 
-### Donations
-Developing and maintaining this is not easy. If you like this extension or find it helpful, buy me a cup of coffee!
-
-| [Buy Me A Coffee](https://buymeacoffee.com/jackyrao) | [PayPal](https://paypal.me/jackyrao) | WeChat |
-|---------|---------|---------|
-| <a href="https://buymeacoffee.com/jackyrao" target="_blank"><img src="https://raw.githubusercontent.com/jackyr/simple-chat-hub-extension/main/qrcodes/bmc.png" width="200" alt="Buy Me A Coffee"></a> | <a href="https://paypal.me/jackyrao" target="_blank"><img src="https://raw.githubusercontent.com/jackyr/simple-chat-hub-extension/main/qrcodes/paypal.png" width="200" alt="PayPal"></a> | <img src="https://raw.githubusercontent.com/jackyr/simple-chat-hub-extension/main/qrcodes/wechat.png" width="200" alt="WeChat"> |
-
-### Donors
-Thank you to our wonderful sponsors for the project! Your support helps keep it alive.
-
-- **❤️ cshuang201718**
-- **❤️ Adrien Feudjio**
-- **❤️ L*I**
-- **❤️ huyz**
-
-Some anonymous donors cannot be listed here. If you would like your name to be included, please leave it in the note when making your donation.
-
 ### Note
 Due to personal time and cost limitations, not all versions of the models have been thoroughly tested. Your valuable feedback and suggestions are welcome!
