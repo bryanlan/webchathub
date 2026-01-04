@@ -1,1 +1,7 @@
 .DS_Store
+*.crx
+*.crx.zip
+temp.zip
+crx-extracted/
+crx-original/
+__MACOSX/
