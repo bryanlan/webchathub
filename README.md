@@ -5,6 +5,10 @@
 ## Fork changes (this repo)
 - Removes non-chatbot API calls from the extension and blocks requests to non-allowlisted hosts.
 - Handles the Claude embedded sidebar issue by opening Claude in a separate tab and showing a live preview stream in the panel (desktopCapture).
+- Claude streaming preview usage:
+  - Open Claude from the hub (it will open in a tab), then click the Claude preview in the hub.
+  - When prompted, choose the Claude tab to share.
+  - Use the preview controls (zoom/pan/fit) to focus on the chat area.
 - Keeps the rest of the upstream UI/features where possible; see upstream README below for general usage details.
 
 ## Upstream
