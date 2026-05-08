@@ -1,45 +1,89 @@
 {
   "changed_paths": [
-    "AGENTS.md",
-    "CLAUDE.md"
+    "docs/agent_docs/agents_md_status.json",
+    "docs/agent_docs/commit_dossier.json",
+    "docs/agent_docs/commit_dossier.md",
+    "docs/agent_docs/doc_status.json",
+    "docs/agent_docs/running_tests.md",
+    "docs/architecture.md",
+    "docs/fileindex.md"
   ],
   "commits": [
     {
       "author": "Bryan",
-      "commit": "c012cc3edc1130926670da3678d152a020941366",
-      "date": "2026-03-28T16:52:36-07:00",
+      "commit": "4b6e1c1b01588d7c0ceff4639b19e180e0885672",
+      "date": "2026-05-04T22:01:36-07:00",
       "files": [
         {
           "paths": [
-            "AGENTS.md"
+            "docs/agent_docs/commit_dossier.json"
           ],
           "status": "A"
         },
         {
           "paths": [
-            "CLAUDE.md"
+            "docs/agent_docs/commit_dossier.md"
+          ],
+          "status": "A"
+        },
+        {
+          "paths": [
+            "docs/agent_docs/doc_status.json"
+          ],
+          "status": "A"
+        },
+        {
+          "paths": [
+            "docs/agent_docs/running_tests.md"
+          ],
+          "status": "A"
+        },
+        {
+          "paths": [
+            "docs/architecture.md"
+          ],
+          "status": "A"
+        },
+        {
+          "paths": [
+            "docs/fileindex.md"
           ],
           "status": "A"
         }
       ],
-      "short_commit": "c012cc3",
-      "subject": "docs: refresh agent instructions"
+      "short_commit": "4b6e1c1",
+      "subject": "Sync repo docs"
+    },
+    {
+      "author": "Bryan",
+      "commit": "933776489f0a05e5701b4869eb97d76734674978",
+      "date": "2026-05-05T07:24:31-07:00",
+      "files": [
+        {
+          "paths": [
+            "docs/agent_docs/agents_md_status.json"
+          ],
+          "status": "A"
+        }
+      ],
+      "short_commit": "9337764",
+      "subject": "Track AGENTS.md refresh status"
     }
   ],
   "docs_current_through": {
-    "commit": "135c618f10f026ae5604dc23553bbbf652e56595",
-    "date": "2026-01-04T04:46:01-08:00"
-  },
-  "from_commit": "135c618f10f026ae5604dc23553bbbf652e56595",
-  "generated_at": "2026-05-05T05:01:14+00:00",
-  "head": {
     "commit": "c012cc3edc1130926670da3678d152a020941366",
-    "date": "2026-03-28T16:52:36-07:00",
-    "short_commit": "c012cc3"
+    "date": "2026-03-28T16:52:36-07:00"
+  },
+  "from_commit": "c012cc3edc1130926670da3678d152a020941366",
+  "generated_at": "2026-05-08T09:38:52+00:00",
+  "head": {
+    "commit": "933776489f0a05e5701b4869eb97d76734674978",
+    "date": "2026-05-05T07:24:31-07:00",
+    "short_commit": "9337764"
   },
   "mode": "delta",
   "recent_commits": [],
   "repo": "/home/bryan/code/webchathub",
-  "to_commit": "c012cc3edc1130926670da3678d152a020941366",
+  "to_commit": "933776489f0a05e5701b4869eb97d76734674978",
   "worktree_dirty": true
 }
