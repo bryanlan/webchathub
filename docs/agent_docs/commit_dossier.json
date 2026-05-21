@@ -10,8 +10,8 @@
   "commits": [
     {
       "author": "Bryan",
-      "commit": "86c2eb6787390353a0ac464f4b44d8aa7a23cb27",
-      "date": "2026-05-11T02:32:29-07:00",
+      "commit": "71531e61588f097e07de13a794ce37c09c87765f",
+      "date": "2026-05-13T02:11:39-07:00",
       "files": [
         {
           "paths": [
@@ -50,24 +50,24 @@
           "status": "M"
         }
       ],
-      "short_commit": "86c2eb6",
+      "short_commit": "71531e6",
       "subject": "Sync repo docs"
     }
   ],
   "docs_current_through": {
-    "commit": "1a329b1341afadfd069085b13c97929a88023749",
-    "date": "2026-05-09T02:02:36-07:00"
-  },
-  "from_commit": "1a329b1341afadfd069085b13c97929a88023749",
-  "generated_at": "2026-05-13T09:11:39+00:00",
-  "head": {
     "commit": "86c2eb6787390353a0ac464f4b44d8aa7a23cb27",
-    "date": "2026-05-11T02:32:29-07:00",
-    "short_commit": "86c2eb6"
+    "date": "2026-05-11T02:32:29-07:00"
+  },
+  "from_commit": "86c2eb6787390353a0ac464f4b44d8aa7a23cb27",
+  "generated_at": "2026-05-21T09:36:52+00:00",
+  "head": {
+    "commit": "71531e61588f097e07de13a794ce37c09c87765f",
+    "date": "2026-05-13T02:11:39-07:00",
+    "short_commit": "71531e6"
   },
   "mode": "delta",
   "recent_commits": [],
   "repo": "/home/bryan/code/webchathub",
-  "to_commit": "86c2eb6787390353a0ac464f4b44d8aa7a23cb27",
+  "to_commit": "71531e61588f097e07de13a794ce37c09c87765f",
   "worktree_dirty": true
 }

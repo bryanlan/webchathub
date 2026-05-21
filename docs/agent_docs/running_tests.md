@@ -1,8 +1,8 @@
 ---
 doc_type: running_tests
 managed_by: sync-repo-docs
-current_through_commit: 86c2eb6787390353a0ac464f4b44d8aa7a23cb27
-current_through_date: 2026-05-11T02:32:29-07:00
+current_through_commit: 71531e61588f097e07de13a794ce37c09c87765f
+current_through_date: 2026-05-13T02:11:39-07:00
 ---
 
 # Running Tests
@@ -10,11 +10,11 @@ current_through_date: 2026-05-11T02:32:29-07:00
 ## Primary Commands
 
 - `cd /home/bryan/code/webchathub && python3 -m json.tool crx-extracted/manifest.json >/dev/null`
-  Passes. This is the quickest sanity check that the live unpacked manifest is valid JSON.
+  Passed on May 21, 2026. This is the quickest sanity check that the live unpacked manifest is valid JSON.
 - `cd /home/bryan/code/webchathub && diff -u crx-original/manifest.json crx-extracted/manifest.json`
-  Produces the expected fork delta. This is the most useful non-browser verification path because it shows the narrowed host allowlist and the added capture-related permissions.
+  Produced the expected fork delta on May 21, 2026. This is the most useful non-browser verification path because it shows the narrowed host allowlist and the added capture-related permissions.
 - `cd /home/bryan/code/webchathub && unzip -l Simple-Chat-Hub-2.0.0.crx.zip`
-  Passes. Use this to confirm the packaged zip still contains the `.crx` payload.
+  Passed on May 21, 2026. Use this to confirm the packaged zip still contains the `.crx` payload.
 
 ## Targeted Test Patterns
 
