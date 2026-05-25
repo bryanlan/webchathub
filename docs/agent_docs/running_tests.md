@@ -1,22 +1,25 @@
 ---
 doc_type: running_tests
 managed_by: sync-repo-docs
-current_through_commit: eca9ee19bd929564e960840bb6c8402fcb579e8f
-current_through_date: 2026-05-25T02:04:19-07:00
+current_through_commit: 94aee73c753817b3a7bde2bfb3129b19e2ed3e31
+current_through_date: 2026-05-25T02:07:17-07:00
 ---
 
 # Running Tests
 ## Primary Commands
-- No safe generic test command was identified from manifests or tracked test directories. Inspect repo-specific docs before running broad checks.
+- No dedicated automated test command was identified from the current manifests; use focused source inspection plus any documented project-specific checks.
 
 ## Targeted Test Patterns
+- Run the narrowest available package, pytest, or Playwright command for the files being changed.
 
 ## Environment and Fixtures
-No committed environment example was detected. Avoid assuming live credentials or production services are available during tests.
+- Install dependencies using the package manager or Python environment described by the current manifests before running tests.
+- Check `.env.example`, `env.example`, README setup sections, and local service requirements before running integration checks.
+- Prefer focused unit or build checks when broad tests require external services.
 
 ## Edge Cases
-- Treat deploy, restore, migration, promotion, and production data commands as operational workflows, not tests.
-- If a broad test command needs external services, prefer a smaller unit or build check while documenting the missing dependency.
+- Treat deploy, restore, migration, promotion, scheduler, and production data commands as operational workflows, not tests.
+- If a broad test command needs live credentials, databases, browsers, or sibling services, document that dependency and run the smallest safe check available.
 
 ## Known Gaps
-- Commands listed here were inferred from current manifests and tracked tests during the rollout; run them before relying on a change.
+- Commands in this file are derived from current manifests and tracked tests; if a repo-specific guide documents a stricter check, prefer the guide.

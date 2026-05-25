@@ -1,33 +1,36 @@
 ---
 doc_type: fileindex
 managed_by: sync-repo-docs
-current_through_commit: eca9ee19bd929564e960840bb6c8402fcb579e8f
-current_through_date: 2026-05-25T02:04:19-07:00
+current_through_commit: 94aee73c753817b3a7bde2bfb3129b19e2ed3e31
+current_through_date: 2026-05-25T02:07:17-07:00
 ---
 
 # File Index
 ## Top-Level Layout
-- `crx-extracted/` - top-level directory in the current tree.
-- `docs/` - top-level directory in the current tree.
-- `qrcodes/` - top-level directory in the current tree.
-- `screenshots/` - top-level directory in the current tree.
+- `crx-extracted/` - JavaScript/TypeScript source.
+- `docs/` - repository documentation and managed doc-sync metadata.
+- `qrcodes/` - tracked repository area; inspect contained files before changing behavior.
+- `screenshots/` - tracked repository area; inspect contained files before changing behavior.
 
 ## Key Directories
-- `crx-extracted/` - contains `crx-extracted/assets/chunk-809f580f.js`, `crx-extracted/assets/chunk-93671912.js`, `crx-extracted/assets/chunk-b76f4e26.js`, `crx-extracted/assets/chunk-cdf2dc81.js`, `crx-extracted/assets/claude-main.js`.
-- `docs/` - contains `docs/agent_docs/agents_md_status.json`, `docs/agent_docs/commit_dossier.json`, `docs/agent_docs/commit_dossier.md`, `docs/agent_docs/doc_status.json`, `docs/agent_docs/running_tests.md`.
-- `qrcodes/` - contains `qrcodes/bmc.png`, `qrcodes/paypal.png`, `qrcodes/wechat.png`.
-- `screenshots/` - contains `screenshots/screenshot2_cn.png`, `screenshots/screenshot2_en.png`, `screenshots/screenshot3_cn.png`, `screenshots/screenshot3_en.png`, `screenshots/screenshot4_cn.png`.
+- `crx-extracted/` - JavaScript/TypeScript source.
+- `docs/` - repository documentation and managed doc-sync metadata.
+- `qrcodes/` - tracked repository area; inspect contained files before changing behavior.
+- `screenshots/` - tracked repository area; inspect contained files before changing behavior.
 
 ## Key Files
-- `README.md` - repository configuration, entrypoint, or operator documentation.
-- `AGENTS.md` - repository configuration, entrypoint, or operator documentation.
-- `CLAUDE.md` - repository configuration, entrypoint, or operator documentation.
-- JS/TS anchors: `crx-extracted/assets/chunk-809f580f.js`, `crx-extracted/assets/chunk-93671912.js`, `crx-extracted/assets/chunk-b76f4e26.js`, `crx-extracted/assets/chunk-cdf2dc81.js`, `crx-extracted/assets/claude-main.js`.
-- Test anchors: `docs/agent_docs/running_tests.md`.
+- `README.md` - key tracked file or entrypoint for this repo.
+- `AGENTS.md` - key tracked file or entrypoint for this repo.
+- `CLAUDE.md` - key tracked file or entrypoint for this repo.
+
+Test and verification anchors:
+- No tracked test files were identified.
 
 ## Change Hotspots
-- `docs/` changes should be reviewed with adjacent tests and docs.
-- When touching manifests or runtime entrypoints, update this file and `docs/architecture.md` in the same change.
+- Runtime entrypoint changes should be reviewed with adjacent service, route, CLI, or frontend modules and the tests that exercise them.
+- Manifest or dependency changes should be reviewed with setup docs and `docs/agent_docs/running_tests.md`.
+- Documentation-only changes should stay scoped to managed docs unless source-of-truth operator docs are stale.
+- When recent commits rename, split, or demote modules, verify whether the old file still owns behavior or only delegates to newer modules.
 
 ## Deferred or Unclear Areas
-- This automated rollout used live manifests, README content, and tracked file layout; deeper domain semantics should be confirmed in representative source before large behavior changes.
+- This rollout used live manifests, README content, tracked file layout, and representative source paths. Confirm deeper domain semantics in source before large behavior changes.
