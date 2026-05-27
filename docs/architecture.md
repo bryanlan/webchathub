@@ -1,39 +1,47 @@
 ---
 doc_type: architecture
 managed_by: sync-repo-docs
-current_through_commit: 94aee73c753817b3a7bde2bfb3129b19e2ed3e31
-current_through_date: 2026-05-25T02:07:17-07:00
+current_through_commit: 6948adcf7b3c3e7a5cf5791f843673f354db70c3
+current_through_date: 2026-05-25T08:48:04-07:00
 ---
 
 # Architecture
 ## System Overview
-webchathub is documented from the current repository tree. The primary human overview is `README.md`; this managed doc is a current-state navigation and architecture companion for agents.
+`webchathub` is an artifact-driven browser-extension fork of Simple Chat Hub. The live runtime is the unpacked Manifest V3 bundle under `crx-extracted/`; there is no source-first root build toolchain in this repo.
 
 First-class runtime surfaces:
-- Tracked source and documentation files in the current git tree.
+- `crx-extracted/manifest.json` and the unpacked extension assets.
+- `crx-original/` as the upstream comparison bundle.
+- Packaged artifacts `Simple-Chat-Hub-2.0.0.crx` and `Simple-Chat-Hub-2.0.0.crx.zip`.
+- Fork/operator docs in `README.md`, `CHANGELOG.md`, `CUSTOM_CONFIG_EXAMPLE.md`, and `docs/`.
 
 ## Main Components
-- `crx-extracted/` - JavaScript/TypeScript source.
-- `docs/` - repository documentation and managed doc-sync metadata.
-- `qrcodes/` - tracked repository area; inspect contained files before changing behavior.
-- `screenshots/` - tracked repository area; inspect contained files before changing behavior.
+- `crx-extracted/` contains the live unpacked MV3 extension bundle, including compiled JS/CSS assets, locale files, icons, service worker loader, and manifest.
+- `crx-original/` contains the original unpacked comparison bundle.
+- `Simple-Chat-Hub-2.0.0.crx` and `Simple-Chat-Hub-2.0.0.crx.zip` are release artifacts that can drift from `crx-extracted/`.
+- `screenshots/` and `qrcodes/` are support artifacts from the upstream/fork package.
+- `docs/` contains managed repo-doc sync metadata and agent navigation.
 
 Representative source anchors include `README.md`, `AGENTS.md`, `CLAUDE.md`.
 
 ## Data Flow
-Start at the runtime surfaces above, then follow imports, routes, command handlers, or scripts into the source directories listed in `docs/fileindex.md`. Treat generated outputs, caches, local data, and reports as derived artifacts unless the repo README or an operator guide explicitly says they are source inputs.
+Chrome/Edge loads `crx-extracted/` as an unpacked extension. The manifest registers static resources, compiled assets, host permissions, and browser permissions. The fork intentionally narrows host access to allowlisted chatbot domains and adds Claude preview support through `tabCapture`/`desktopCapture`.
+
+Most extension logic is compiled into `crx-extracted/assets/*.js`; behavior review is artifact inspection plus manual browser loading. When changing behavior, compare `crx-original/manifest.json` with `crx-extracted/manifest.json`, inspect the relevant built asset, and keep unpacked and packaged artifacts aligned.
 
 The latest doc sync reviewed 6 changed path(s) since the previous docs baseline.
 
 ## External Integrations
-- Anthropic/Claude references appear in manifests, README, or environment examples; verify concrete clients in source before changing behavior.
-- GitHub references appear in manifests, README, or environment examples; verify concrete clients in source before changing behavior.
-- FastAPI/HTTP references appear in manifests, README, or environment examples; verify concrete clients in source before changing behavior.
+- Chrome/Edge extension APIs: MV3, service worker loader, `declarativeNetRequest`, `scripting`, `storage`, `activeTab`, `tabCapture`, and `desktopCapture`.
+- Allowlisted chatbot hosts currently include ChatGPT, Gemini, Claude, Grok, Kimi, and DeepSeek domains.
+- Claude preview uses a separate Claude tab plus user-selected capture/preview inside the hub panel.
 
 ## Key Decisions
 - Managed docs are synchronized against the live tree and finalized to the current git `HEAD`; commit dossier files are navigation context, not source of truth.
 - Prefer current ownership modules over stale facade or compatibility paths when changing behavior.
 - Do not add compatibility layers, fallback mappings, or legacy response fields unless the caller contract explicitly requires them.
+- Do not broaden host permissions casually. `<all_urls>` was intentionally replaced with explicit chatbot host allowlists.
+- Because no root rebuild workflow is exposed, be explicit whether a change modifies only `crx-extracted/` or also updates packaged CRX/zip artifacts.
 
 ## Operational Notes
 Use `docs/agent_docs/running_tests.md` for safe verification commands. Do not infer deploy, restore, migration, promotion, scheduler, or production-mutating workflows from test documentation.

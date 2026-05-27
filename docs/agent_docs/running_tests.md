@@ -1,25 +1,31 @@
 ---
 doc_type: running_tests
 managed_by: sync-repo-docs
-current_through_commit: 94aee73c753817b3a7bde2bfb3129b19e2ed3e31
-current_through_date: 2026-05-25T02:07:17-07:00
+current_through_commit: 6948adcf7b3c3e7a5cf5791f843673f354db70c3
+current_through_date: 2026-05-25T08:48:04-07:00
 ---
 
 # Running Tests
 ## Primary Commands
-- No dedicated automated test command was identified from the current manifests; use focused source inspection plus any documented project-specific checks.
+- `python3 -m json.tool crx-extracted/manifest.json >/dev/null` - passed on 2026-05-27.
+- `diff -u crx-original/manifest.json crx-extracted/manifest.json` - expected nonzero diff showing fork changes; reviewed on 2026-05-27.
+- `unzip -l Simple-Chat-Hub-2.0.0.crx.zip` - passed on 2026-05-27 and listed the packaged CRX plus macOS metadata entry.
 
 ## Targeted Test Patterns
-- Run the narrowest available package, pytest, or Playwright command for the files being changed.
+- Manifest-only checks: `python3 -m json.tool crx-extracted/manifest.json >/dev/null && diff -u crx-original/manifest.json crx-extracted/manifest.json`.
+- Packaged artifact check: `unzip -l Simple-Chat-Hub-2.0.0.crx.zip`.
+- Manual runtime check: load `crx-extracted/` as an unpacked extension in Chrome/Edge and exercise the edited platform panel.
 
 ## Environment and Fixtures
-- Install dependencies using the package manager or Python environment described by the current manifests before running tests.
-- Check `.env.example`, `env.example`, README setup sections, and local service requirements before running integration checks.
-- Prefer focused unit or build checks when broad tests require external services.
+- No root install/build toolchain is exposed in this repo.
+- `crx-extracted/` is the live unpacked bundle; `crx-original/` is the upstream comparison bundle.
+- Browser validation requires Chrome or Edge extension developer mode.
+- Claude preview validation requires selecting the Claude tab in the capture prompt and checking zoom/pan/fit preview behavior.
 
 ## Edge Cases
 - Treat deploy, restore, migration, promotion, scheduler, and production data commands as operational workflows, not tests.
-- If a broad test command needs live credentials, databases, browsers, or sibling services, document that dependency and run the smallest safe check available.
+- There is no automated browser suite in this repo. Manifest/package checks do not prove the extension UI or capture flow works.
+- Host permissions are intentionally allowlisted; do not treat broadening them as a test shortcut.
 
 ## Known Gaps
-- Commands in this file are derived from current manifests and tracked tests; if a repo-specific guide documents a stricter check, prefer the guide.
+- Manual unpacked-extension validation is still required for behavior changes in compiled assets.
