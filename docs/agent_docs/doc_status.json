@@ -1,17 +1,17 @@
 {
   "docs_current_through": {
-    "commit": "f6c6ca9c3a2b8afabceeabd9a57f9c701a000eae",
-    "date": "2026-05-27T19:14:56-07:00"
+    "commit": "9ec6118f8a95d3b1187cdb3f505dad13c636ecb2",
+    "date": "2026-06-04T23:36:13-07:00"
   },
-  "docs_last_synced_at": "2026-06-05T06:36:13+00:00",
+  "docs_last_synced_at": "2026-06-07T06:40:52+00:00",
   "docs_root": "docs",
   "last_dossier": {
     "commit_count": 1,
-    "from_commit": "5b8bfaf7f239bfc3563d9ab696cff9d78bceebaf",
-    "generated_at": "2026-06-05T06:36:13+00:00",
+    "from_commit": "f6c6ca9c3a2b8afabceeabd9a57f9c701a000eae",
+    "generated_at": "2026-06-07T06:40:52+00:00",
     "json_path": "docs/agent_docs/commit_dossier.json",
     "markdown_path": "docs/agent_docs/commit_dossier.md",
-    "to_commit": "f6c6ca9c3a2b8afabceeabd9a57f9c701a000eae"
+    "to_commit": "9ec6118f8a95d3b1187cdb3f505dad13c636ecb2"
   },
   "managed_by": "sync-repo-docs",
   "managed_docs": [
