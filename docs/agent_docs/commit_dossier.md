@@ -1,11 +1,11 @@
 # Commit Dossier
 
 - Repository: `/home/bryan/code/webchathub`
-- Generated at: `2026-06-14T07:00:43+00:00`
-- Repo HEAD: `0f1520ca47b70b1132c091fe1481516213377d40` (2026-06-12T23:21:33-07:00)
+- Generated at: `2026-06-21T05:42:49+00:00`
+- Repo HEAD: `6b9254c1807d5e86379ef607e9335c6e7081ed1d` (2026-06-14T00:01:37-07:00)
 - Worktree dirty: `true`
-- Docs current through: `d2982dfbd6c69eec6fca07e3e7e5f1f61f7948d5`
-- Docs current through date: `2026-06-06T23:40:52-07:00`
+- Docs current through: `0f1520ca47b70b1132c091fe1481516213377d40`
+- Docs current through date: `2026-06-12T23:21:33-07:00`
 
 ## Changed Paths Since Docs Baseline
 
@@ -18,9 +18,9 @@
 
 ## Commits Since Docs Baseline
 
-### 0f1520c Sync repo docs
+### 6b9254c Sync repo docs
 
-- Date: `2026-06-12T23:21:33-07:00`
+- Date: `2026-06-14T00:01:37-07:00`
 - Author: `Bryan`
 - Files:
   - `M` `docs/agent_docs/commit_dossier.json`
