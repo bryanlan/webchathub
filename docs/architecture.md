@@ -1,8 +1,8 @@
 ---
 doc_type: architecture
 managed_by: sync-repo-docs
-current_through_commit: 6b9254c1807d5e86379ef607e9335c6e7081ed1d
-current_through_date: 2026-06-14T00:01:37-07:00
+current_through_commit: 6104fe31303dcb36a064b20c17b015058f1f2e18
+current_through_date: 2026-06-20T22:43:15-07:00
 ---
 
 # Architecture
@@ -29,7 +29,8 @@ Chrome/Edge loads `crx-extracted/` as an unpacked extension. The manifest regist
 
 Most extension logic is compiled into `crx-extracted/assets/*.js`; behavior review is artifact inspection plus manual browser loading. When changing behavior, compare `crx-original/manifest.json` with `crx-extracted/manifest.json`, inspect the relevant built asset, and keep unpacked and packaged artifacts aligned.
 
-The latest doc sync reviewed 6 changed path(s) since the previous docs baseline.
+The current sync found no live runtime changes since the previous docs baseline; intervening
+changes were managed-doc metadata.
 
 ## External Integrations
 - Chrome/Edge extension APIs: MV3, service worker loader, `declarativeNetRequest`, `scripting`, `storage`, `activeTab`, `tabCapture`, and `desktopCapture`.

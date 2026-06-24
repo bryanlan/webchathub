@@ -1,15 +1,15 @@
 ---
 doc_type: running_tests
 managed_by: sync-repo-docs
-current_through_commit: 6b9254c1807d5e86379ef607e9335c6e7081ed1d
-current_through_date: 2026-06-14T00:01:37-07:00
+current_through_commit: 6104fe31303dcb36a064b20c17b015058f1f2e18
+current_through_date: 2026-06-20T22:43:15-07:00
 ---
 
 # Running Tests
 ## Primary Commands
-- `python3 -m json.tool crx-extracted/manifest.json >/dev/null` - passed on 2026-06-14.
-- `diff -u crx-original/manifest.json crx-extracted/manifest.json` - expected nonzero diff showing fork changes; reviewed on 2026-06-14.
-- `unzip -l Simple-Chat-Hub-2.0.0.crx.zip` - passed on 2026-06-14 and listed the packaged CRX plus macOS metadata entry.
+- `python3 -m json.tool crx-extracted/manifest.json >/dev/null` - passed on 2026-06-24.
+- `diff -u crx-original/manifest.json crx-extracted/manifest.json` - expected nonzero diff showing fork host allowlist and capture permission changes; reviewed on 2026-06-24.
+- `unzip -l Simple-Chat-Hub-2.0.0.crx.zip` - passed on 2026-06-24 and listed the packaged CRX plus macOS metadata entry.
 
 ## Targeted Test Patterns
 - Manifest-only checks: `python3 -m json.tool crx-extracted/manifest.json >/dev/null && diff -u crx-original/manifest.json crx-extracted/manifest.json`.
