@@ -1,6 +1,6 @@
 {
-  "agents_md_current_through_commit": "4b6e1c1b01588d7c0ceff4639b19e180e0885672",
-  "agents_md_last_synced_at": "2026-05-05T14:06:47.769406+00:00",
+  "agents_md_current_through_commit": "231fdb92a724ba0dbc27942e2a4580d2b094a2d5",
+  "agents_md_last_synced_at": "2026-06-29T06:09:32.847193+00:00",
   "alias": {
     "exists": true,
     "is_symlink": true,
@@ -22,11 +22,11 @@
   "git_status": {
     "alias": null,
     "canonical": null,
-    "status": "??"
+    "status": null
   },
   "managed_by": "roll-agents-md",
   "notes": [
-    "Preserved artifact-first extension model, unpacked bundle source of truth, permission/host allowlist, and packaging drift risk."
+    "Preserved artifact-first extension model, host-permission allowlist, and packaged/unpacked drift warning."
   ],
   "referenced_calibration_docs": [
     "docs/architecture.md",
