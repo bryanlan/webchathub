@@ -1,6 +1,6 @@
 {
-  "agents_md_current_through_commit": "231fdb92a724ba0dbc27942e2a4580d2b094a2d5",
-  "agents_md_last_synced_at": "2026-06-29T06:09:32.847193+00:00",
+  "agents_md_current_through_commit": "ee7ab47cc2ea862470c52f06a240588c50e80a42",
+  "agents_md_last_synced_at": "2026-07-16T22:16:11+00:00",
   "alias": {
     "exists": true,
     "is_symlink": true,
@@ -15,7 +15,7 @@
     "template_sha256": "08c278e2b4e4a22acd24bf0b43db03813de078515e3efde82c8c7a0a0df30e30"
   },
   "canonical_path": "AGENTS.md",
-  "canonical_sha256": "53dd2b10824e910f883ab8e1f93acf990631104411afac7673a0cf59bc833ddd",
+  "canonical_sha256": "3b02d7225637035a1adc9164d3d53e8321f95ee2cf53e3231d30edded3202ccb",
   "git_ignore": {
     "status": null
   },
