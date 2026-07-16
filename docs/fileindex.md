@@ -1,51 +1,44 @@
----
-doc_type: fileindex
-managed_by: sync-repo-docs
-current_through_commit: abca89dbaacd63be392285f13a6ffb1c693264dc
-current_through_date: 2026-07-10T00:20:22-04:00
----
-
 # File Index
+
 ## Top-Level Layout
-- `crx-extracted/` - live unpacked MV3 extension bundle.
-- `crx-original/` - upstream/original unpacked bundle for fork comparison.
-- `Simple-Chat-Hub-2.0.0.crx` and `Simple-Chat-Hub-2.0.0.crx.zip` - packaged release artifacts.
-- `docs/` - managed repo-doc sync metadata and agent navigation.
-- `qrcodes/` and `screenshots/` - support/release assets.
+- `crx-extracted/` - checked-in extension artifact directory. In this checkout it contains the manifest and compiled assets only, not a complete unpacked extension bundle.
+- `Simple-Chat-Hub-2.0.0.crx.zip` - packaged release archive containing `Simple-Chat-Hub-2.0.0.crx` and a macOS metadata entry.
+- `docs/` - durable navigation docs for architecture, file ownership, and safe validation commands.
+- `docs/agent_docs/` - agent-facing documentation. `running_tests.md` is the maintained validation guide.
+- `qrcodes/` and `screenshots/` - upstream/fork support assets used by package documentation.
+- `README.md`, `README_CN.md`, `CHANGELOG.md`, and `CUSTOM_CONFIG_EXAMPLE.md` - operator and upstream support docs.
 
-## Key Directories
-- `crx-extracted/assets/` - compiled JS/CSS/assets, including fork-specific Claude preview code.
-- `crx-extracted/_locales/` - extension locale message files.
-- `crx-extracted/img/` - extension icon assets.
-- `crx-original/` - comparison bundle; use this to identify fork-specific manifest and asset changes.
-- `docs/agent_docs/` - managed doc-sync status and commit dossier files.
+## Runtime Artifact Files
+- `crx-extracted/manifest.json` - primary manifest authority for version, permissions, host allowlist, options page path, background service worker path, content script resources, and web-accessible resources.
+- `crx-extracted/assets/chunk-cdf2dc81.js` - shared compiled dependency/runtime chunk. It owns the built-in platform config, allowlist filtering, custom config persistence, and request/network guard symbols such as `__ALLOW_HOSTS`, `__filterApps`, `__isAllowedUrl`, and `__installGuard`.
+- `crx-extracted/assets/chunk-809f580f.js` - main bundled UI/runtime logic. It imports `chunk-cdf2dc81.js` plus missing checked-in chunks such as `chunk-936fa2ae.js` and `chunk-a783bd53.js`.
+- `crx-extracted/assets/chunk-93671912.js` - background/service-worker bundle for dynamic rules, content-script registration, Claude main-world registration, config reload, and extension action click behavior.
+- `crx-extracted/assets/chunk-b76f4e26.js` - content-script bundle for page automation, text sending, readiness, capture/scroll, and Claude helper injection request handling.
+- `crx-extracted/assets/claude-main.js` - Claude-specific helper loaded into Claude pages.
 
-## Key Files
-- `README.md` - key tracked file or entrypoint for this repo.
-- `AGENTS.md` - key tracked file or entrypoint for this repo.
-- `CLAUDE.md` - key tracked file or entrypoint for this repo.
-- `CHANGELOG.md`, `CUSTOM_CONFIG_EXAMPLE.md`, and `README_CN.md` - upstream/fork support docs.
-- `crx-extracted/manifest.json` - live extension manifest; primary review point for permissions, host allowlist, resources, and service worker.
-- `crx-original/manifest.json` - upstream comparison manifest.
-- `crx-extracted/assets/claude-main.js` - fork-specific Claude preview/capture asset.
-- `crx-extracted/assets/chunk-*.js` and `chatHub-ab3d4279.css` - compiled extension runtime and styling.
-- `crx-extracted/service-worker-loader.js` and `chatHub.html` - extension service worker and panel entry files.
-- `Simple-Chat-Hub-2.0.0.crx.zip` - zipped CRX package; inspect with `unzip -l`.
+## Missing or Drift-Sensitive Paths
+- `crx-original/` is not present in this checkout. Do not list comparison commands against it as runnable validation unless the directory is restored.
+- `Simple-Chat-Hub-2.0.0.crx` is not present as a root-level file; it is inside `Simple-Chat-Hub-2.0.0.crx.zip`.
+- `crx-extracted/chatHub.html`, `crx-extracted/service-worker-loader.js`, and `crx-extracted/img/*` are referenced by the manifest but are not present in the checked-in `crx-extracted/` tree.
+- The manifest and compiled imports reference chunk names that are absent from `crx-extracted/assets/`, including `chunk-936fa2ae.js` and `chunk-a783bd53.js`. `chunk-93671912.js` also dynamically registers `/assets/index.ts-loader-7fda2deb.js`, which is absent from the checked-in tree. Check manifest resources, static JS imports, and dynamic script/resource path strings before assuming the unpacked bundle can load.
+- The nested CRX inside `Simple-Chat-Hub-2.0.0.crx.zip` is currently drifted from `crx-extracted/`: its manifest has `host_permissions: ["<all_urls>"]`, does not request `tabCapture` or `desktopCapture`, and lacks `assets/claude-main.js`.
 
-Test and verification anchors:
-- No source-level test suite is present.
-- Manifest syntax: `python3 -m json.tool crx-extracted/manifest.json >/dev/null`.
-- Fork manifest diff: `diff -u crx-original/manifest.json crx-extracted/manifest.json`.
-- Packaged artifact listing: `unzip -l Simple-Chat-Hub-2.0.0.crx.zip`.
+## Documentation Files
+- `AGENTS.md` - repository instructions and guardrails for artifact-driven extension work.
+- `docs/architecture.md` - current runtime ownership, behavior flow, external integrations, and artifact completeness caveats.
+- `docs/fileindex.md` - this file; use it for navigation and file ownership.
+- `docs/agent_docs/running_tests.md` - safe, repeatable checks for this artifact repository.
 
 ## Change Hotspots
-- Runtime entrypoint changes should be reviewed with adjacent service, route, CLI, or frontend modules and the tests that exercise them.
-- Manifest or dependency changes should be reviewed with setup docs and `docs/agent_docs/running_tests.md`.
-- Documentation-only changes should stay scoped to managed docs unless source-of-truth operator docs are stale.
-- Manifest changes should review `crx-original/manifest.json`, `crx-extracted/manifest.json`, README fork notes, and manual browser loading.
-- Claude preview changes should inspect `crx-extracted/assets/claude-main.js`, manifest capture permissions, and manual capture/preview behavior.
-- Packaging changes should keep `crx-extracted/`, `.crx`, and `.crx.zip` artifacts aligned or explicitly document the drift.
-- When recent commits rename, split, or demote modules, verify whether the old file still owns behavior or only delegates to newer modules.
+- Manifest changes: inspect `crx-extracted/manifest.json`, verify referenced files exist, run manifest JSON validation, and review permissions/host permissions closely.
+- Runtime allowlist changes: inspect both the manifest allowlists and the compiled allowlist guard in `crx-extracted/assets/chunk-cdf2dc81.js`.
+- Background/content-script changes: inspect `chunk-93671912.js`, `chunk-b76f4e26.js`, and manifest script/resource references together.
+- Claude preview changes: inspect `assets/claude-main.js`, `chunk-b76f4e26.js`, `chunk-93671912.js`, and the `tabCapture`/`desktopCapture` permissions.
+- Packaging changes: inspect `Simple-Chat-Hub-2.0.0.crx.zip` with `unzip -l`, inspect the nested CRX payload manifest/assets, and confirm whether packaged contents match the intended unpacked runtime.
 
-## Deferred or Unclear Areas
-- There is no root build/repack command in the repository. Manual extension loading and artifact comparison are the current validation path.
+## Validation Anchors
+- Manifest syntax: `python3 -m json.tool crx-extracted/manifest.json >/dev/null`.
+- Repository file inventory: `find crx-extracted -maxdepth 2 -type f -printf '%P\n' | sort`.
+- Package listing: `unzip -l Simple-Chat-Hub-2.0.0.crx.zip`, followed by nested CRX payload inspection when package alignment matters.
+- Reference coverage: compare manifest resources, static JS imports, and dynamic script/resource path strings such as `/assets/index.ts-loader-7fda2deb.js` against the checked-in `crx-extracted/` tree.
+- Manual runtime validation requires a complete unpacked extension directory or the packaged CRX; the current `crx-extracted/` tree alone is incomplete.
