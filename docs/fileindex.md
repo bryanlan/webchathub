@@ -20,7 +20,7 @@
 - `crx-original/` is not present in this checkout. Do not list comparison commands against it as runnable validation unless the directory is restored.
 - `Simple-Chat-Hub-2.0.0.crx` is not present as a root-level file; it is inside `Simple-Chat-Hub-2.0.0.crx.zip`.
 - `crx-extracted/chatHub.html`, `crx-extracted/service-worker-loader.js`, and `crx-extracted/img/*` are referenced by the manifest but are not present in the checked-in `crx-extracted/` tree.
-- The manifest and compiled imports reference chunk names that are absent from `crx-extracted/assets/`, including `chunk-936fa2ae.js` and `chunk-a783bd53.js`. `chunk-93671912.js` also dynamically registers `/assets/index.ts-loader-7fda2deb.js`, which is absent from the checked-in tree. Check manifest resources, static JS imports, and dynamic script/resource path strings before assuming the unpacked bundle can load.
+- The manifest and compiled imports reference chunk names that are absent from `crx-extracted/assets/`, including `chunk-936fa2ae.js` and `chunk-a783bd53.js`. `chunk-93671912.js` also dynamically registers `/assets/index.ts-loader-7fda2deb.js`, and `chunk-809f580f.js` references missing hashed UI/support assets such as `assets/logoDefault-fabbf774.svg`, `assets/bmc-176c31ac.png`, `assets/paypal-57a61d48.png`, `assets/wechat-dca54bb1.png`, `assets/promptOptIntroCN-f7e6cf76.png`, and `assets/promptOptIntroEN-01a47bdb.png`. Check manifest resources, static JS imports, and dynamic script/resource path strings before assuming the unpacked bundle can load.
 - The nested CRX inside `Simple-Chat-Hub-2.0.0.crx.zip` is currently drifted from `crx-extracted/`: its manifest has `host_permissions: ["<all_urls>"]`, does not request `tabCapture` or `desktopCapture`, and lacks `assets/claude-main.js`.
 
 ## Documentation Files
@@ -40,5 +40,5 @@
 - Manifest syntax: `python3 -m json.tool crx-extracted/manifest.json >/dev/null`.
 - Repository file inventory: `find crx-extracted -maxdepth 2 -type f -printf '%P\n' | sort`.
 - Package listing: `unzip -l Simple-Chat-Hub-2.0.0.crx.zip`, followed by nested CRX payload inspection when package alignment matters.
-- Reference coverage: compare manifest resources, static JS imports, and dynamic script/resource path strings such as `/assets/index.ts-loader-7fda2deb.js` against the checked-in `crx-extracted/` tree.
+- Reference coverage: compare manifest resources, static JS imports, and dynamic script/resource path strings such as `/assets/index.ts-loader-7fda2deb.js` and hashed UI/support asset URLs against the checked-in `crx-extracted/` tree.
 - Manual runtime validation requires a complete unpacked extension directory or the packaged CRX; the current `crx-extracted/` tree alone is incomplete.

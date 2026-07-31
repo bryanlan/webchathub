@@ -14,12 +14,12 @@
 - Content-script behavior: inspect `crx-extracted/assets/chunk-b76f4e26.js` for send/readiness/capture behavior and Claude helper injection requests.
 - Claude helper: inspect `crx-extracted/assets/claude-main.js` for Claude-page-specific behavior.
 - Nested CRX payload: parse `Simple-Chat-Hub-2.0.0.crx.zip` through the contained CRX payload before claiming package alignment. Check its nested `manifest.json`, permissions, host permissions, and asset names against `crx-extracted/`.
-- Reference coverage: compare manifest resources, static JS imports, and dynamic script/resource path strings against the checked-in tree. Include manifest resources such as `assets/chunk-936fa2ae.js` and `assets/chunk-a783bd53.js`, static JS imports of those chunks, and the dynamic `/assets/index.ts-loader-7fda2deb.js` registration from `chunk-93671912.js`.
+- Reference coverage: compare manifest resources, static JS imports, and dynamic script/resource path strings against the checked-in tree. Include manifest resources such as `assets/chunk-936fa2ae.js` and `assets/chunk-a783bd53.js`, static JS imports of those chunks, the dynamic `/assets/index.ts-loader-7fda2deb.js` registration from `chunk-93671912.js`, and hashed UI/support asset URLs referenced by `chunk-809f580f.js`.
 
 ## Manual Runtime Validation
 Manual browser validation is required for behavior changes in compiled assets, permissions, capture flows, or UI behavior. Use Chrome or Edge extension developer mode.
 
-The checked-in `crx-extracted/` directory is not currently a complete unpacked extension because manifest-referenced files such as `chatHub.html`, `service-worker-loader.js`, `img/*`, `assets/chunk-936fa2ae.js`, and `assets/chunk-a783bd53.js` are absent. It also lacks the dynamically registered `/assets/index.ts-loader-7fda2deb.js`. Load a complete unpacked bundle when validating fork runtime behavior.
+The checked-in `crx-extracted/` directory is not currently a complete unpacked extension because manifest-referenced files such as `chatHub.html`, `service-worker-loader.js`, `img/*`, `assets/chunk-936fa2ae.js`, and `assets/chunk-a783bd53.js` are absent. It also lacks the dynamically registered `/assets/index.ts-loader-7fda2deb.js` and hashed UI/support assets referenced by `chunk-809f580f.js`, including the logo, donation QR, and prompt-intro files. Load a complete unpacked bundle when validating fork runtime behavior.
 
 Do not use the packaged CRX as a substitute for fork runtime validation unless it is rebuilt or proven aligned. The current nested CRX is drifted: its manifest has broad `<all_urls>` host access, lacks `tabCapture` and `desktopCapture`, and omits `assets/claude-main.js`.
 
