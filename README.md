@@ -11,6 +11,12 @@
   - Use the preview controls (zoom/pan/fit) to focus on the chat area.
 - Keeps the rest of the upstream UI/features where possible; see upstream README below for general usage details.
 
+## Fork artifact status
+
+The checked-in `crx-extracted/` directory is incomplete: it lacks the HTML entrypoint, service-worker loader, icons and imported scripts needed to load the extension. The nested CRX in `Simple-Chat-Hub-2.0.0.crx.zip` is an older package with `<all_urls>` access, no capture permissions and no `assets/claude-main.js`; it does not contain the fork behavior described above.
+
+The upstream installation instructions below describe upstream releases. Validate this fork with a complete, aligned unpacked bundle. See [architecture](docs/architecture.md) and [artifact checks](docs/agent_docs/running_tests.md).
+
 ## Upstream
 Upstream project: https://github.com/jackyr/simple-chat-hub-extension
 
